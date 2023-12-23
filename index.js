@@ -5,6 +5,7 @@ const connectMongo =require("./config/mongose")
 const dotenv  = require("dotenv").config();
 const Router = require("./routes/index");
 const exp = require("constants");
+const PORT = process.env.PORT || 3000;
 
  
 
@@ -27,6 +28,6 @@ connectMongo(process.env.URI).then(console.log("connected to mongoDB"))
 
 
 
-app.listen(3000,()=>{
-    console.log(("server connected on port 3000"));
+app.listen(PORT,()=>{
+    console.log("server connected on port",PORT);
 })
