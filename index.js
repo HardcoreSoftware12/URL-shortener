@@ -5,8 +5,7 @@ const connectMongo =require("./config/mongose")
 const dotenv  = require("dotenv").config();
 const Router = require("./routes/index")
 
-
-// app.use(express.static(path.join(__dirname, 'views'))); 
+ 
 
 app.set("view engine","ejs");
 console.log(__dirname);
