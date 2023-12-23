@@ -10,37 +10,43 @@ const urlShortener =async(req,res)=>{
     console.log(req.body.url);
     const long = req.body.url;
     if(!long){
-        res.status(400).send("url is required")
-    }else{
-        const short = shortId.generate();
-        await URL.create({
-        shortUrl:short,
-        longUrl:long,
-        // clicks:[]
-            
-    })
-    return res.json({url:short})
-
+        return res.status(400).send("url is required")
+        
     }
+        //cddd
+        const prev = await URL.findOne({longUrl : long})
+        if(prev){
+            console.log("alreadyy shortened");
+            return res.render("index",{
+                message:"already shortened",
+                url:prev.shortUrl,
+                long:long
+            }) 
+        }else{
+            const short = shortId.generate();
+            await URL.create({
+            shortUrl:short,
+            longUrl:long,
+            // clicks:[]
+                
+        })
+        return res.render("index",{
+            url:short,
+            long:long
+        })
+
+        }
+        ///dddd
+       
+    // return res.json({url:short})
+
+    
     
 }
 
 const getLongUrl = async(req,res)=>{
     const short = req.params.shortId;
     console.log(short);
-
-    // const results = await URL.findOneAndUpdate({short},{
-    //     $inc:{
-    //         clicks:1
-    //     }
-    // })
-    // console.log(results);
-
-    // res.redirect(results.longUrl)
-
-
-
-
     try {
         const myDoc = await URL.findOne({shortUrl:short})
         console.log(myDoc);
@@ -77,8 +83,14 @@ const totalClicks = async(req,res)=>{
     }else{
         // res.status(200).send("Total clicks : ",myDoc.clicks)
         console.log(myDoc.clicks);
+        res.render("clicks",{
+            clicks:myDoc.clicks
+        })
     }
 
+}
+const reset =(req,res)=>{
+    res.render("index")
 }
 
 
@@ -87,5 +99,6 @@ const totalClicks = async(req,res)=>{
 module.exports = {
     urlShortener,
     getLongUrl,
-    totalClicks
+    totalClicks,
+    reset
 }

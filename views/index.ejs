@@ -4,9 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body>
-    <h1>heyy server si </h1>
+   
+    <!-- <h1>Url shortener </h1> -->
+    <!-- <div class="form-holder">
+    <form action="/url/shortener" method="post">
+        <label for="url">Enter Your URL</label>
+        <input type="text" name="url" placeholder="example:xxx@xx.com">
+        <button type="submit">Submit</button>
+    </form>
+    </div> -->
+
+    <div class="center">
+        <h1>URl shortener</h1>
+        <form action="/url/shortener" method="post">
+          
+          <div class="inputbox">
+            <input type="text" required="required" name="url">
+            <span>example:xxx@xx.com</span>
+          </div>
+         <!-- <button type="submit">Submit</button> -->
+         
+        <button type="submit" class="button-9">Generate</button>
+        </form>
+      </div>
+
+      
+
+
+
+
+
+<% if(locals.url){%>
+    <%if(locals.message){%>
+        <p class="message"><%= message %></p>
+
+    <%}%>
+    <p>Generated Url : 
+        <a href=http://localhost:3000/url/<%= url %>>
+            http://localhost:3000/url/<%= url %>
+    </a>
+    </p>
+    <p>Long Url : 
+        <a href=http://localhost:3000/url/<%= long %>>
+            http://localhost:3000/url/<%= long %>
+    </a>
+    </p>
+
+
+
+    
+<a href="/url/clicks/<%= url %>" class="button" >Total clicks</a>
+   
+<a href="/" class="button">Shorten Another Url</a>
+
+
+        
+
+
+
+
+<%}%>
+
+<!-- <button hre></button> -->
+
+
+
     
 </body>
 </html>

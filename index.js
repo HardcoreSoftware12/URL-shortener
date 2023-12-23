@@ -3,16 +3,20 @@ const path = require("path")
 const app = express();
 const connectMongo =require("./config/mongose")
 const dotenv  = require("dotenv").config();
-const Router = require("./routes/index")
+const Router = require("./routes/index");
+const exp = require("constants");
 
  
 
 app.set("view engine","ejs");
-console.log(__dirname);
-console.log(path.join(__dirname+"/views"));
+
+
 app.set("views",path.join(__dirname,"/views"))
 
+app.use(express.static(path.join(__dirname,"public")))
+
 app.use(express.json());
+app.use(express.urlencoded({extended:false}))
 app.use("/",Router)
 
 
