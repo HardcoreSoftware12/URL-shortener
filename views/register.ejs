@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="/styles/login.css">
+</head>
+<body>
+    <div class="container">
+        <form action="/create-user" method="POST">
+           
+            <h2>Sign - Up</h2>
+            <label for="username">Email:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            
+            <label for="password">Confirm Password:</label>
+            <input type="password" id="password" name="confirm" required>
+
+            <%if(locals.message){%>
+                <p><%= message %> <a href="/login">login</a></p>
+
+            <%}%>
+
+            <%if(locals.passmessage){%>
+                    
+                <p style="color: red;"><%= passmessage%></p></label>
+                    <%}%>
+
+
+
+            
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

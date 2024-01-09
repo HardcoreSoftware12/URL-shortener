@@ -1,6 +1,55 @@
 // const shortID = require("short-id");
 const shortId = require("shortid")
 const URL = require("../models/urlSchema")
+const User = require("../models/userSchema")
+
+
+
+
+const createUser = async (req,res)=>{
+    console.log("in");
+    console.log(req.body.username);
+    console.log(req.body.password);
+    console.log(req.body.confirm);
+    const username = req.body.username
+    const password = req.body.password
+    const confirm = req.body.confirm
+
+    const prev = await User.findOne({name:username})
+    if(prev){
+        return res.render("register",{message:"user is registered please"})
+    }else if(password != confirm){
+        
+        return res.render("register",{passmessage:"passwords doesn't match"})
+
+    }else{
+        await User.create({
+            name:username,
+            password:password
+        })
+        res.render("login")
+    }
+    
+
+}
+
+
+const login = async(req,res)=>{
+    
+    const username = req.body.username
+    const password = req.body.password
+
+    const prev = await User.findOne({name:username})
+    if(!prev){
+        res.render("login",{usermessage:"no user found please"})
+
+
+    }else if(password == prev.password){
+        res.render("index")
+    }else{
+        res.render("login",{message:"password incorrect"})
+    }
+}
 
 
 
@@ -101,5 +150,7 @@ module.exports = {
     urlShortener,
     getLongUrl,
     totalClicks,
-    reset
+    reset,
+    createUser,
+    login
 }
