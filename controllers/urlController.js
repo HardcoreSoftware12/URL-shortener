@@ -133,9 +133,14 @@ const totalClicks = async(req,res)=>{
     }else{
         // res.status(200).send("Total clicks : ",myDoc.clicks)
         console.log(myDoc.clicks);
-        res.render("clicks",{
-            clicks:myDoc.clicks
-        })
+      
+            res.render("clicks",{
+                clicks:myDoc.clicks
+            })
+                    
+
+
+        
     }
 
 }
