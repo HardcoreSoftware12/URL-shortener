@@ -45,6 +45,7 @@ const urlShortener =async(req,res)=>{
 }
 
 const getLongUrl = async(req,res)=>{
+    console.log("here");
     const short = req.params.shortId;
     console.log(short);
     try {

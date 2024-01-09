@@ -16,8 +16,16 @@ const urlSchema = mongose.Schema({
     clicks:{
         type:Number,
         default:0
+    },
+    createdAt:{
+        type:Date,
+        default:new Date()
+        // default:1
     }
 })
+
+//creating expiry after 48 hours using TTL
+urlSchema.index({createdAt:1},{expireAfterSeconds:30})
 
 const URL = mongose.model("url",urlSchema);
 
